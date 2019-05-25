@@ -1,0 +1,19 @@
+version: "3"
+services:
+  redis:
+    image: redis:5.0.4   
+  elasticsearch:
+    build: elasticsearch
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+  rails:
+    build: rails
+  nginx:
+    build: nginx
+    depends_on:
+      - rails
+    ports:
+      - "8000:80"
+
+volumes:
+  esdata:
